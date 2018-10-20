@@ -89,7 +89,9 @@ public:
 };
 
 #include "resources.cpp"
-#include "sciter-gtk-main.cpp"
+#if defined(LINUX)
+#  include "sciter-gtk-main.cpp"
+#endif
 
 int uimain(std::function<int()> run ) {
 

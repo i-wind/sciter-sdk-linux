@@ -4,6 +4,7 @@ log/
 tmp/
 
 .scons*
+resources.cpp
 
 *~
 *.bak
