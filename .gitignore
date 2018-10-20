@@ -1,6 +1,9 @@
 # directories
+bin.gtk/
 log/
 tmp/
+
+.scons*
 
 *~
 *.bak
