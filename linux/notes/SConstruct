@@ -1,13 +1,21 @@
 
+#import subprocess as sp
+
 env = Environment(
-    CXXFLAGS='-m64 -pipe -O3 -g -Wall -W -Wextra -Wno-attributes -Wno-unused-parameter -Wno-unknown-pragmas -std=c++11',
+    CXXFLAGS='-m64 -pipe -O3 -g -Wall -W -Wextra -Wno-unused-parameter -Wno-unknown-pragmas -std=c++11',
     LINKFLAGS=['-m64', '-g', '-Wl,-O3'],
     CPPPATH=['#../../include'],
     LIBPATH=['#../../bin.gtk/x64'],
     LIBS=['dl', 'sciter-gtk']
 )
 
-env.ParseConfig("pkg-config gtk+-3.0 --cflags --libs")
-env.Program('notes', ['notes.cpp', 'resources.cpp'])
+#cmd = sp.call('../../bin.gtk/x64/packfolder res resources.cpp -v "resources"', shell=True)
+cmd = env.Command(
+    'resources.cpp', 'res', '../../bin.gtk/x64/packfolder $SOURCE $TARGET -v "resources"')
 
-Clean('all', '.sconsign.dblite')
+env.ParseConfig("pkg-config gtk+-3.0 --cflags --libs")
+prog = env.Program('notes', ['notes.cpp', 'resources.cpp'])
+env.Depends(prog, cmd)
+
+#Clean('all', ['.sconsign.dblite', 'resources.cpp'])
+env.Clean('all', ['.sconsign.dblite'])

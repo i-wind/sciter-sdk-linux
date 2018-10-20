@@ -346,8 +346,8 @@ namespace tiscript
     value   pos;
     HVM     vm;
   public:
-    enumerator(pinned& collection):col(collection), vm(collection.get_vm()), pos(0) {}
-    enumerator(HVM c, value collection):col(collection), vm(c), pos(0) {}
+    enumerator(pinned& collection):col(collection), pos(0), vm(collection.get_vm()) {}
+    enumerator(HVM c, value collection):col(collection), pos(0), vm(c) {}
     bool operator()(value& key, value& val) { return ni()->get_next_key_value(vm,&col,&pos,&key,&val); }
     bool operator()(value& val)             { return ni()->get_next(vm,&col,&pos,&val); }
   };
@@ -490,7 +490,7 @@ namespace tiscript
 
 #define TISCRIPT_RETURN_2(c,rv1,rv2) { tiscript_value vs[] = {rv1, rv2}; return tiscript::ni()->make_val_list(c,2,vs); }
 #define TISCRIPT_RETURN_3(c,rv1,rv2,rv3) { tiscript_value vs[] = {rv1, rv2, rv3}; return tiscript::ni()->make_val_list(c,3,vs); }
-#define TISCRIPT_RETURN_4(c,rv1,rv2,rv3,rv4) { tiscript_value vs[] = {rv1, rv2, rv3, rv4}; return tiscript::ni()->make_val_list(c,4,vs); } 
+#define TISCRIPT_RETURN_4(c,rv1,rv2,rv3,rv4) { tiscript_value vs[] = {rv1, rv2, rv3, rv4}; return tiscript::ni()->make_val_list(c,4,vs); }
 
 #endif
 

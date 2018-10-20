@@ -251,7 +251,7 @@ template <typename T >
   inline wchars  chars_of( const WCHAR *t )   {  return t? wchars(t,(unsigned int)wcslen(t)):wchars(); }
   inline chars   chars_of( const char *t )    {  return t? chars(t,(unsigned int)strlen(t)):chars(); }
 
-  
+
 
   template<typename T>
      slice<T> chars_of( const std::basic_string<T> &s ) {  return slice<T>(s.c_str(), s.length()); }
@@ -280,7 +280,7 @@ template <typename T >
         const T* tail;
         const T* start;
         const T* end;
-        const bool  is_delimeter(T el)  { for(const T* t = delimeters;t && *t; ++t) if(el == *t) return true;  return false; }
+        bool  is_delimeter(T el)  const { for(const T* t = delimeters;t && *t; ++t) if(el == *t) return true;  return false; }
         const T*    tok()               { for(;p < tail; ++p) if(is_delimeter(*p)) return p++; return p; }
       public:
 
