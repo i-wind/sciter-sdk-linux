@@ -1,0 +1,17 @@
+
+env = Environment(
+    CXXFLAGS='-m64 -pipe -O3 -g -Wall -W -Wextra -Wno-unused-parameter -Wno-unknown-pragmas -std=c++11',
+    LINKFLAGS=['-m64', '-g', '-Wl,-O3'],
+    CPPPATH=['#../../include'],
+    LIBPATH=['#../../bin.gtk/x64'],
+    LIBS=['dl', 'sciter-gtk']
+)
+
+env.Command(
+    'resources.cpp', 'res', '../../bin.gtk/x64/packfolder $SOURCE $TARGET -v "resources"')
+
+env.ParseConfig("pkg-config gtk+-3.0 --cflags --libs")
+prog = env.Program('usciter', ['usciter.cpp', 'resources.cpp'])
+Depends(prog, 'resources.cpp')
+
+env.Clean('all', ['.sconsign.dblite'])
