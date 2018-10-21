@@ -10,12 +10,12 @@ env = Environment(
 )
 
 #cmd = sp.call('../../bin.gtk/x64/packfolder res resources.cpp -v "resources"', shell=True)
-cmd = env.Command(
+env.Command(
     'resources.cpp', 'res', '../../bin.gtk/x64/packfolder $SOURCE $TARGET -v "resources"')
 
 env.ParseConfig("pkg-config gtk+-3.0 --cflags --libs")
 prog = env.Program('notes', ['notes.cpp', 'resources.cpp'])
-env.Depends(prog, cmd)
+Depends(prog, 'resources.cpp')
 
 #Clean('all', ['.sconsign.dblite', 'resources.cpp'])
 env.Clean('all', ['.sconsign.dblite'])

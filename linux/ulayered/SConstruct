@@ -11,7 +11,7 @@ env.Command(
     'resources.cpp', 'res', '../../bin.gtk/x64/packfolder $SOURCE $TARGET -v "resources"')
 
 env.ParseConfig("pkg-config gtk+-3.0 --cflags --libs")
-prog = env.Program('uminimal', ['uminimal.cpp', 'resources.cpp'])
+prog = env.Program('ulayered', ['ulayered.cpp', 'resources.cpp'])
 Depends(prog, 'resources.cpp')
 
 env.Clean('all', ['.sconsign.dblite'])
