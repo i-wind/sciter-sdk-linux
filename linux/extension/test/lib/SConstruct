@@ -1,0 +1,13 @@
+
+env = Environment(
+    CXXFLAGS='-m64 -pipe -O3 -g -Wall -W -Wextra -std=c++11',
+    LINKFLAGS=['-m64', '-g', '-Wl,-O3'],
+    CPPPATH=['#../../../../include'],
+    LIBPATH=['.', '../../../../bin.gtk/x64'],
+    LIBS=['sciter-gtk']
+)
+
+env.ParseConfig("pkg-config gtk+-3.0 --cflags --libs")
+env.SharedLibrary('tiscript-test', ['tiscripttest.cpp'], LIBPREFIX='')
+
+Clean('all', '.sconsign.dblite')

@@ -13,6 +13,7 @@ resources.cpp
 *.log
 *.mo
 *.[oa]
+*.os
 *.so
 *.py[co]
 
